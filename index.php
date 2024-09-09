@@ -31,7 +31,7 @@
 
     <div class="container">
         <h3 class="text-center mb-4">Formulário de Cadastro</h3>
-        <form id="form-cadastro" action="model/cadastro.php" method="POST">
+        <form id="form-cadastro" action="" method="POST">
             <div class="mb-3">
                 <label for="nome" class="form-label">Nome:</label>
                 <input type="text" class="form-control" id="nome" name="nome" required>
