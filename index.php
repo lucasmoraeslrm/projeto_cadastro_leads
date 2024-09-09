@@ -1,10 +1,3 @@
-<?php
-// Inicia a sessão e gera um token CSRF
-session_start();
-$csrf_token = bin2hex(random_bytes(32));
-$_SESSION['csrf_token'] = $csrf_token;
-?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -85,40 +78,6 @@ $_SESSION['csrf_token'] = $csrf_token;
 
     <!-- Bootstrap JS and dependencies -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-
-    <script>
-        document.getElementById('cnpj').addEventListener('blur', function() {
-            var cnpj = this.value;
-
-            if (cnpj.length === 14) {
-                // Faz a requisição para o PHP que chama a API do CNPJ
-                fetch('model/cnpj.php?cnpj=' + cnpj)
-                    .then(response => response.json()) // Converte a resposta para JSON
-                    .then(data => {
-                        if (data.status === 'OK') {
-                            // Preenche os campos do formulário com os dados retornados pela API
-
-                            // Nome ou razão social
-                            document.getElementById('razao').value = data.nome;
-
-                            // Atividade principal (apenas o texto da primeira atividade)
-                            if (data.atividade_principal && data.atividade_principal.length > 0) {
-                                document.getElementById('atividade').value = data.atividade_principal[0].text;
-                            }
-
-                            // Cidade
-                            document.getElementById('cidade').value = data.municipio;
-
-                        } else {
-                            alert('Erro ao consultar CNPJ');
-                        }
-                    })
-                    .catch(error => console.error('Erro na consulta:', error));
-            } else {
-                alert('CNPJ inválido');
-            }
-        });
-    </script>
 
 </body>
 
